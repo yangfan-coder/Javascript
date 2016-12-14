@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>在字符串里面查找数字</title>
+</head>
+<body>
+	<script>
+		var str = 'dasd32dasda546dasd55f2we554dad0';
+		// 普通的方法
+		function fnStr(str){
+
+			var attr =[];
+			var tamp ='';
+
+			for( var i = 0 ;i<str.length; i++)
+			{
+
+				if(str.charAt(i) <= "9" && str.charAt(i) >= "0")
+				{
+					tamp+=str.charAt(i);
+				}else{
+
+					if(tamp)
+					{
+						attr.push(tamp);
+						tamp = '';
+					}
+				}
+			}
+			if(tamp)
+			{
+				attr.push(tamp);
+				tamp = '';
+			}
+			return attr;
+		}
+		console.log(fnStr(str))
+
+		// 正则表达式的方式
+		var re = /\d+/g;		 	// \d是获取数字大写的\D是非数字 加上一个量词+获取一次或者多次出现的位置，g全局匹配
+		var mun = str.match(re);	// match 方法返回一个数组类型，找不到的话会返回一个null
+		console.log(mun)
+	</script>
+</body>
+</html>
