@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style>
+		div {
+
+			height: 200px;
+			width: 200px;
+			background: #000;
+			position: absolute;
+			top: 0;
+			left: 0;
+			cursor: pointer;
+		}
+		#box1 {
+
+			left: 150px;
+			background: red;
+		}
+	</style>
+	<script>
+		
+		window.onload =function (){
+			// 原始方法；
+			var box = document.getElementById('box');
+
+			box.onmousedown=function (e)
+			{
+				var e = e || window.event;
+				var disX = e.clientX - box.offsetLeft;
+				var disY = e.clientY - box.offsetTop;
+
+				document.onmousemove = function (e){
+					var e = e || window.event;
+					box.style.left = e.clientX - disX + "px";
+					box.style.top = e.clientY - disY + "px";
+
+
+
+				};
+				document.onmouseup = function (){
+
+					document.onmouseup = null;
+					document.onmousemove = null;
+				};
+				return false;
+			};
+		// 面向对象的继承方法：
+			var box = new Diser('box');
+				box.init();
+			var box1 = new newInit('box1');
+				box1.init();
+		};
+		function Diser (id)
+		{
+			this.id =document.getElementById(id);
+			this.disX = 0;
+			this.disY = 0;
+		}
+		Diser.prototype.init = function ()
+		{
+			var This = this;
+			this.id.onmousedown = function(e)
+			{
+				e = e || window.event;
+				This.fnDown(e)
+
+				document.onmousemove = function (e)
+				{
+					e = e || window.event;
+					This.fnMove(e)
+
+				}
+				document.onmouseup = function ()
+				{
+
+					This.fnUp(e)
+				}
+			}
+			return false;
+		}
+		Diser.prototype.fnDown = function (e)
+		{
+			this.disX = e.clientX - this.id.offsetLeft;
+			this.disY = e.clientY - this.id.offsetTop;
+		}
+		Diser.prototype.fnMove = function (e)
+		{
+			this.id.style.left = e.clientX - this.disX + "px";
+			this.id.style.top = e.clientY - this.disY + "px";
+		}
+		Diser.prototype.fnUp = function ()
+		{
+
+			document.onmousemove = document.onmouseup = null;
+		}
+
+
+		// 继承属性
+		function newInit (id)
+		{
+			Diser.call(this,id)
+
+		}
+		// 继承方法
+		Exend(newInit.prototype,Diser.prototype);
+
+		newInit.prototype.fnMove = function (e)
+		{
+			// 限制范围
+			var L = e.clientX - this.disX;
+			var Y = e.clientY - this.disY;
+
+			if( L < 0 ){
+
+				L = 0;
+			}else if( L > document.documentElement.clientWidth  -this.id.offsetWidth){
+				console.log(document .documentElement.clientWidth)
+				L =  document.documentElement.clientWidth  - this.id.offsetWidth;
+
+			}
+			if( Y < 0 ){
+
+				Y = 0;
+			}else if( Y > document.documentElement.clientHeight  - this.id.offsetHeight){
+				Y =  document.documentElement.clientHeight  - this.id.offsetHeight;
+
+			}
+
+			this.id.style.left = L + "px";
+			this.id.style.top =  Y + "px";
+		}
+
+		// 拷贝继承（继承方法）
+		function Exend(obj1,obj2)
+		{
+			for( var  attr in obj2)
+			{
+				obj1[attr] = obj2[attr];
+			}
+		}
+
+	</script>
+</head>
+<body>
+	<div id="box">
+		
+	</div>
+	<div id="box1">
+		
+	</div>
+</body>
+</html>
