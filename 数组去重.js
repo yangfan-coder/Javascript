@@ -46,4 +46,24 @@ var b = showTimer1(attrs)
 console.log(b)
 // 较短
 console.timeEnd('time');
+/*
+	这是刚才看算法的时候发现的,性能消耗的比较大，就是双for来回比对;
+	关键的一点就是arr[i]==arr[j]的时候，应该i++,父级的for的索引递加
+*/
 
+console.time('time')
+	function delRepeat(arr) {
+		var newArr = [];
+		for( var i = 0 ;i < arr.length; i++){
+			for( var j = i+1; j<arr.length; j++ ){
+				if(arr[i] == arr[j]){
+					i++;
+				}
+			}
+			newArr.push(arr[i]);
+		}
+		return newArr;
+	}
+	var arr = ["12","12","123","235",'235'];
+console.log(delRepeat(arr))
+console.timeEnd('time')
