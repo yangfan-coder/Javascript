@@ -26,4 +26,25 @@
 		}
 	}
 	console.log(newArr);
+
+	// 我刚发现还有一种特简单的排序 我的天哪~~
+	var friends = [
+		{name:"John",age:30},
+		{name:"Ana",age:20},
+		{name:"Chris",age:10}
+	]
+	function comparePerson (a,b) {		// 比较一下得了呗 亏我想的那么多（妈蛋。）
+		if(a.age > b.age) {
+			return 1;
+		}else if(a.age < b.age) {
+			return -1;
+		}else {
+			return 0;
+		}
+	}
+	console.log(friends.sort(comparePerson))
+
+
 }())
+
+
