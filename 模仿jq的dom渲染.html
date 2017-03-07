@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>document.ready执行函数</title>
+</head>
+<body>
+	<script>
+		document.ready = function (callback) {
+
+			if(document.addEventListener){
+
+				document.addEventListener("DOMContentLoaded",function(){
+
+					document.removeEventListener("DOMContentLoaded",arguments.cellee,false);
+					callback();
+				},false)
+			}else if(document.attachEvent){
+
+				document.attachEvent("onreadystatechange",function(){
+
+					if(document.readyState == "complete"){
+
+						document.detachEvent("onreadystatechange",arguments.cellee);
+						callback();
+					}
+				})
+			}else if(document.lastChild == document.body){
+				callback();
+			}
+		}
+
+		window.onload = function () {
+
+			alert(1)
+		}
+		document.ready(function(){
+			alert(2)
+		})
+	</script>
+</body>
+</html>
