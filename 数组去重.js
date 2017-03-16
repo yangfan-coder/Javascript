@@ -67,3 +67,16 @@ console.time('time')
 	var arr = ["12","12","123","235",'235'];
 console.log(delRepeat(arr))
 console.timeEnd('time')
+
+
+/* 运用ES6的方法去重
+   在ES6中新添加了一个Set的数据类型；他类似于数组，但是成员不是唯一的，没有重复的值
+   然后在用 Array.from() 转化为数组return就可以，【ES6】
+   当然你可以用 [].slice.call(new Set(array)); 【ES3】
+   或者是你可以用 [...new Set(array)] return也可以；【ES6】
+*/
+function dedupe(array){
+	return Array.from(new Set(array));
+}
+var arr = dedupe([1,1,2,3,6,6,3]);
+console.log(arr)
