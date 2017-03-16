@@ -81,7 +81,10 @@ function dedupe(array){
 var arr = dedupe([1,1,2,3,6,6,3]);
 console.log(arr)
 
-
+// 或者更简便
+let arr = [1,2,3,2,1,6,8];
+let unique = [...new Set(arr)];
+console.log(unique)
 
 
 
