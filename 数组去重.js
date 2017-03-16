@@ -80,3 +80,10 @@ function dedupe(array){
 }
 var arr = dedupe([1,1,2,3,6,6,3]);
 console.log(arr)
+
+
+
+
+
+
+
