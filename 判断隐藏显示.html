@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>demo</title>
+	<style>
+		div {
+			height: 150px;
+			width: 150px;
+			background: #ccc;
+			margin: 10px;
+			float: left;
+		}
+	</style>
+</head>
+<body>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<div class="div" >0</div>
+	<script>
+		var divs = document.getElementsByTagName('div');
+		for( var i = 0, len = divs.length; i<len; i++){
+			divs[i].onclick = function(){
+
+				for( var j = 0; j<divs.length; j++){
+					if(divs[j]!=this){
+						divs[j].innerHTML = '0';
+					}
+				}
+				console.log(this.innerHTML)
+				if(this.innerHTML == "0"){
+					this.innerHTML = "1";
+				}else{
+					this.innerHTML = "0";
+				}
+			}
+		}
+	</script>
+</body>
+</html>
