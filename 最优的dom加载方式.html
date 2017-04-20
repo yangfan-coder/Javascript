@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>最优的DOM加载方式</title>
+</head>
+<body>
+	<ul id="js-id">
+	</ul>
+	<script>
+	(function(){
+		const ndContainer = document.getElementById('js-id');
+		if(!ndContainer){
+			return ;
+		}
+		const total = 30;
+		const batchSize = 4;		
+		let batchDone = 0;
+
+		function appendItems() {
+			const frames = document.createDocumentFragment();
+			for(let i = 0;i<batchSize; i++){
+				const ndItem = document.createElement('li');
+				ndItem.innerText = (batchDone * batchSize) + i + 1;
+				frames.appendChild(ndItem);
+			}
+
+			// 每次分批只处理1次dom
+			ndContainer.appendChild(frames);
+			batchDone += 1;
+			doBathAppend();
+		};
+		function doBathAppend(){
+			if(batchDone < total){
+				window.requestAnimationFrame(appendItems);
+			}
+		}
+		doBathAppend();
+		ndContainer.addEventListener("click", function(e){
+			const target = e.target;
+			if(target.tagName === "LI"){
+				alert(target.innerHTML)
+			}
+		});
+	}());
+	</script>
+</body>
+</html>
