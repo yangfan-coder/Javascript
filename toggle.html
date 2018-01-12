@@ -1,0 +1,98 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>demo</title>
+  <style type="text/css">
+    * {
+      margin: 0;
+      padding: 0;
+    }
+    ul  {
+      height: 50px;
+      width: 500px;
+      margin: 0 auto;
+      display: flex;
+    }
+    ul  li {
+      height: 50px;
+      width: 100px;
+      font-size: 35px;
+      color: #333;
+      border:1px solid #000;
+      list-style: none;
+      text-align: center;
+      cursor: pointer;
+    }
+    ul  li.on {
+      background: #ccc;
+      color: #fff;
+    }
+    ol {
+      width: 500px;
+      border:1px solid red;
+      margin: 0 auto;
+      height: 300px;
+      line-height: 300px;
+      font-size: 50px;
+      font-weight: bold;
+    }
+    ol li {
+      list-style: none;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <ul>
+    <li class="on" data-val="0">1</li>
+    <li data-val="0">2</li>
+    <li data-val="0">3</li>
+  </ul>
+  <ol>
+    <li style="display:block">1111</li>
+    <li >2222</li>
+    <li>3333</li>
+  </ol>
+  <script type="text/javascript">
+    let ul = document.querySelectorAll("ul")[0];
+    let ul_li = ul.querySelectorAll("li");
+
+    let ol = document.querySelectorAll("ol")[0];
+    let ol_li = ol.querySelectorAll("li");
+
+    for(let i = 0; i<ul_li.length; i++){
+      
+     ul_li[i].index = i;
+
+     ul_li[i].onclick = function (){
+      let _this = this;
+      let mun = _this.getAttribute("data-val");
+
+      for(let j = 0 ;j<ul_li.length; j++){
+
+        ol_li[j].style.display = "none";
+        ul_li[j].className = "";
+        ul_li[j].setAttribute("data-val","0");
+      }
+      _this.className ='on';
+
+      if(mun == "0") {
+
+        _this.setAttribute("data-val","1");
+        ol_li[_this.index].style.display = "block";
+
+      }else{
+
+        _this.setAttribute("data-val","0");
+        ol_li[_this.index].style.display = "none";
+
+      }
+    }
+
+  }
+
+</script>
+</body>
+</html>
